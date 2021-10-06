@@ -1,6 +1,7 @@
 const { TeamsActivityHandler, CardFactory, TurnContext} = require("botbuilder");
 const rawWelcomeCard = require("./adaptiveCards/welcome.json");
 const rawLearnCard = require("./adaptiveCards/learn.json");
+const rawSandraCard = require("./adaptiveCards/sandra.json");
 const ACData = require("adaptivecards-templating");
 
 class TeamsBot extends TeamsActivityHandler {
@@ -34,6 +35,14 @@ class TeamsBot extends TeamsActivityHandler {
           await context.sendActivity({ attachments: [card] });
           break;
         }
+      
+        case "sandra": {
+          this.likeCountObj.likeCount = 0;
+          const card = this.renderAdaptiveCard(rawSandraCard);
+          await context.sendActivity({ attachments: [card] });
+          break;
+        }
+        
         /**
          * case "yourCommand": {
          *   await context.sendActivity(`Add your response here!`);
